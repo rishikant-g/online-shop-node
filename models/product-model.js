@@ -11,4 +11,21 @@ module.exports = class Product{
    static fetchAllData(){
     return db.execute("SELECT * FROM products");
    }
+
+   save(){
+       return db.execute('INSERT INTO products (title,price,description,imageurl) VALUES(?, ?, ?, ?)',[
+           this.title,
+           this.price,
+           this.description,
+           this.imageUrl
+       ]);
+   }
+
+   static getSingleProduct(id){
+       return db.execute("SELECT * FROM products WHERE id = ?",[id]);
+   }
+
+   static deleteProduct(id){
+       return db.execute("DELETE FROM products WHERE id = ?",[id]);
+   }
 }
